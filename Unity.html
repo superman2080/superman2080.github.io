@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        @import url("./indexCSS.css")
+    </style>
+    <title></title>
+</head>
+<body>
+<pre>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
+
+public class PlayerCtrl : MonoBehaviour
+{
+    public FixedJoystick joystick;
+    public GameObject bullet;
+    public GameObject senser;
+    [Header("카메라 관련 변수")]
+    public GameObject camera;
+    public bool fixedCamera;
+    [SerializeField]
+    private Vector3 cameraPos;
+    [Header("플레이어 속성")]
+    public float speed;
+    private float flexibleSpeed;
+    public float fireSpeed;
+    private float fireTimer = 0;
+    public float attDist;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        flexibleSpeed = speed;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        PlayerMove();
+        CameraMove(fixedCamera);
+        FireBullet();
+    }
+
+    void PlayerMove()
+    {
+        //거리에 따라서 이동속도 조절
+        transform.Translate(new Vector3(Mathf.Sqrt((joystick.Horizontal * joystick.Horizontal) + (joystick.Vertical * joystick.Vertical)) * flexibleSpeed, 0));
+        //방향조절
+        if (Mathf.Sqrt((joystick.Horizontal * joystick.Horizontal) + (joystick.Vertical * joystick.Vertical)) > 0) //조이스틱때문에 방향 초기화되지 않게
+            transform.localRotation = Quaternion.Euler(0, Mathf.Atan2(joystick.Vertical, -joystick.Horizontal) * 180f / (float)Math.PI, 0);
+    }
+
+    void CameraMove(bool fixedcam)
+    {
+        if(fixedcam)
+            camera.transform.position = new Vector3(transform.position.x + cameraPos.x, transform.position.y + cameraPos.y, transform.position.z + cameraPos.z);
+    }
+
+    void FireBullet()
+    {
+        Collider[] hitCollider = Physics.OverlapSphere(transform.position, attDist, 1 << 8);        //범위 내의 적 감지
+        int attTarget = -1;
+        for (int i = 0; i < hitCollider.Length; i++)
+        {
+            if (hitCollider[i].gameObject == gameObject)
+                continue;
+
+            if (attTarget == -1)
+                attTarget = i;
+
+            float dist = Vector3.Distance(transform.position, hitCollider[i].transform.position);
+
+            if (Vector3.Distance(transform.position, hitCollider[attTarget].transform.position) >= dist)
+                attTarget = i;
+        }
+
+        if (attTarget == -1)
+            return;
+
+        if(hitCollider[attTarget] != null)
+        {
+            if(Mathf.Sqrt((joystick.Horizontal * joystick.Horizontal) + (joystick.Vertical * joystick.Vertical)) == 0)
+            {
+                transform.localRotation = Quaternion.Euler(0, (Mathf.Atan2(hitCollider[attTarget].transform.position.x - transform.position.x, (hitCollider[attTarget].transform.position.z - transform.position.z)) * 180f / (float)Math.PI) - 90, 0);
+                fireTimer += Time.deltaTime;
+                if (fireTimer > fireSpeed)
+                {
+                    Instantiate(bullet, senser.transform.position, transform.rotation);
+                    fireTimer = 0;
+                }
+            }
+        }
+        else
+        {
+            fireTimer = fireSpeed / 2;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("WALL"))
+            flexibleSpeed = 0;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("WALL"))
+            flexibleSpeed = speed;
+    }
+}
+</pre>
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		@import url("./indexCSS.css")
+	</style>
+	<title></title>
+</head>
+<body>
+	<pre>
+/*
+	C 서버 프로그래밍
+*/
+#include<windows.h>
+#include<TCHAR.h>
+
+int WINAPI WinMain(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPSTR lpszCmdLine,
+	int nCmdShow) {
+	WSADATA wsadata;		//윈도우 소켓 초기화정보를 가지고 있는 구조체
+	SOCKET s;
+	SOCKADDR_IN addr = { 0, };	//소켓을 연결할 대상의 주소를 사용하는 구조체
+	WSAStartup(MAKEWORD(2, 2), &wsadata);			//윈속 사용 시작하기
+	s = socket(AF_INET, SOCK_STREAM, 0);			//소켓 생성하기
+	addr.sin_family = AF_INET;						//IPv4 프로토콜을 사용(32비트 주소 체계)
+	addr.sin_port = 20;
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");	//루프백 주소 (PC가 한 대일 때 서버와 클라이언트를 테스트)
+	bind(s, (LPSOCKADDR)&addr, sizeof(addr));		//주소와 소켓 연결하기
+
+	if (listen(s, 5) == -1)			//연결 요구 기다리기
+		return 0;
+
+	do {
+		SOCKADDR_IN c_addr;
+		int size = sizeof(c_addr);
+		accept(s, (LPSOCKADDR)&c_addr, &size);		//연결 요구 받아들이기
+	} while (MessageBox(NULL, _T("클라이언트 접속을 확인. 서버 종료?"),		//연결될 경우 메세지박스 출력
+		_T("서버메시지"), MB_YESNO) == IDNO);
+	closesocket(s);		//소켓과 관련된 리소스 해제
+	WSACleanup();		//윈속 사용 끝내기
+	return 1;
+}
+	</pre>
+</body>
+</html>

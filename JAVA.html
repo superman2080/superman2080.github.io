@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        @import url("./indexCSS.css")
+    </style>
+    <title></title>
+</head>
+<body>
+<pre>
+import java.util.Scanner;
+
+class Student{
+    private String name = new String();
+    private int num;
+    private double height;
+    
+    Student(String s, int i, double d)
+    {
+        this.name = s;
+        this.num = i;
+        this.height = d;
+    }
+    
+    public void SetName(String str)
+    {
+        this.name = str;
+    }
+    public String GetName() 
+    {
+        return name;
+    }
+    public void SetNum(int i)
+    {
+        this.num = i;
+    }
+    public int GetNum()
+    {
+        return num;
+    }
+    public void SetHeight(double d)
+    {
+        this.height = d;
+    }
+    public double GetHeight()
+    {
+        return height;
+    }
+    
+    
+    public void PrintInf()
+    {
+        System.out.println("이름 : " + name + ", 학번 : " + num + ", 키 : " + height);
+    }
+}
+
+public class java_20210601 {
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Student st = new Student("홍길동", 20211111, 188.8);
+        st.PrintInf();
+
+        st.SetName("이순신");
+        st.SetNum(20212222);
+        st.SetHeight(177.7);
+        st.PrintInf();
+    }
+}
+</pre>
+</body>
+</html>
+

@@ -1,0 +1,97 @@
+	*{
+		font-family: 나눔스퀘어_ac;
+	}
+		.clear{
+			clear: both;
+		}
+		#page{
+			background-color: #dddddd;
+			width: 1200px;
+			margin: 0 auto;
+			border: solid 0px #cccccc;
+		}
+		header{
+			background-color: #ffffff;
+			border: solid 1px #000000;
+			width: 1200px;
+			height: 200px;
+			margin: 50px 0 20px;
+			padding-top: 20px;
+		}
+		.dN{
+			text-decoration: none;
+		}
+		nav{
+			margin: 0 auto;
+			width : 1000px;
+			height: 100px;
+		}
+		nav li{
+			list-style: none;
+            color: white;
+            background-color: #2d2d2d;
+            float: left;
+            line-height: 30px;
+            vertical-align: middle;
+            text-align: center;
+
+		}
+		#menu{
+			text-decoration:none;
+            color: white;
+            display: block;
+            width: 300px;
+            font-size: 12px;
+		}
+		#menu:hover{
+			background-color: #4d4d4d;
+			color: skyblue;
+		}
+		aside{
+			padding: 10px;
+			background-color: #ffffff;
+			border: solid 1px #000000;
+			float: left;
+			height: 800px;
+			width: 140px;
+			text-decoration: none;
+		}
+		aside a{
+			color: #000000;
+		}
+		aside a:hover{
+			color: skyblue;
+		}
+		aside ul{
+			list-style: none;
+			float: left;
+		}
+		#asideMenu{
+			padding: 20px 0;
+			border-bottom: dashed black;
+		}
+		section{
+			padding: 10px;
+			background-color: #ffffff;
+			border: solid 1px #000000;
+			float: right;
+			height: 800px;
+			width: 995px;
+			margin-bottom: 20px;
+			margin-left: 20px;
+		}
+		footer{
+			height: 150px;
+			width: 1200px;
+			text-align: center;
+		}
+		footer li{
+			position: relative;
+			top: 50px;
+			margin: 20px;
+			display: inline;
+			list-style-type: none;
+		}
+		h1{
+			text-align: center;
+		}

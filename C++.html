@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        @import url("./indexCSS.css")
+    </style>
+    <title></title>
+</head>
+<body>
+    <pre>
+#include <iostream>
+using namespace std;
+ 
+class Point {
+private :
+    int x, y;
+ 
+public :
+    Point(int x_, int y_) {
+        x = x_;
+        y = y_;
+    }
+ 
+    void print() {
+        cout << "x : " << x << ", y : " << y << "\n";
+    }
+};
+ 
+ 
+int main(void) {
+    Point p1 = { 1, 1 };
+    Point p2(2, 2);
+    
+    Point p3 = p1 + p2;
+ 
+    p3.print();
+ 
+    return 0;
+}
+    </pre>
+</body>
+</html>
