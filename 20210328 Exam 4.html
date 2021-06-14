@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>과제 4</title>
+</head>
+<body>
+	<h2>개인신상정보</h2>
+<form>
+	<table border="1">
+		<tr>
+			<td>이름</td><td><input type="text"></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td><td><input type="password" name=""></td>
+		</tr>
+		<tr>
+			<td>성별</td><td><input type="radio" name="gender" id="M"> <label for="M"> 남성 <input type="radio" name="gender" id="F"> <label for="F"> 여성</td>
+		</tr>
+		<tr>
+			 <td>취미</td><td><input type="checkbox" name="hobby"> 영화감상 <input type="checkbox" name="hobby"> 게임 <input type="checkbox" name="hobby"> 음악듣기 </td>
+		</tr>
+		<tr>
+			<td>파일 첨부</td><td><input type="file"></td>
+		</tr>
+		<tr>
+			<td>이메일</td><td><input type="email"> @ 
+				<input list="browsers">
+				<datalist id="browsers">
+					<option>-----선택-----</option>
+					<option>naver.com</option>
+					<option>hanmail.net</option>
+					<option>직접입력</option>
+				</datalist></td>
+		</tr>
+		<tr>
+			<td>자기소개</td><td><textarea rows="5" cols="30"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2"><center><input type="submit"> <input type="reset"></center></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
